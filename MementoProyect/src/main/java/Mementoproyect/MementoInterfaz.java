@@ -7,14 +7,19 @@ package Mementoproyect;
 /**
  *
  * @author Jeshon04_CRC
+ * @author Federico Alfaro Chaverri
  */
 public class MementoInterfaz extends javax.swing.JFrame {
+    Historial historial;
+    Documento documento;
 
     /**
      * Creates new form MementoInterfaz
      */
     public MementoInterfaz() {
         initComponents();
+        historial = new Historial();
+        documento = new Documento();
     }
 
     /**
@@ -48,12 +53,32 @@ public class MementoInterfaz extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         ButtonGuardar.setText("Guardar");
+        ButtonGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ButtonGuardarMouseClicked(evt);
+            }
+        });
 
         ButtonMayuscula.setText("Mayuscula");
+        ButtonMayuscula.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ButtonMayusculaMouseClicked(evt);
+            }
+        });
 
         ButtonMinuscula.setText("Minuscula");
+        ButtonMinuscula.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ButtonMinusculaMouseClicked(evt);
+            }
+        });
 
         ButtonRegresar.setText("Regresar");
+        ButtonRegresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ButtonRegresarMouseClicked(evt);
+            }
+        });
 
         txtCreador.setBorder(javax.swing.BorderFactory.createTitledBorder("Creador"));
 
@@ -132,6 +157,34 @@ public class MementoInterfaz extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void ButtonGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonGuardarMouseClicked
+        if(){ //si los textfield no están vacíos
+            documento.setCreador(txtCreador.getText());
+            documento.setTexto(jTextArea1.getText());
+            historial.guardar(documento.guardarEstado());
+        }else{ //mandar mensaj de rellenar los espacios para guardar
+        
+        }
+    }//GEN-LAST:event_ButtonGuardarMouseClicked
+
+    private void ButtonRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonRegresarMouseClicked
+        if(!historial.vacio()){ //si el historial ya no tiene una copia anterior
+            Memento memento = historial.restaurar();
+            documento.setTexto(memento.getTexto());
+            documento.setCreador(memento.getCreador());
+        }else{ //mandar mensaje de que ya no hay copias o mejor aún esconder el botón
+            aaaaaa //borrar esta linea, es solo para que vean que hay que cambiarlo
+        }
+    }//GEN-LAST:event_ButtonRegresarMouseClicked
+
+    private void ButtonMayusculaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonMayusculaMouseClicked
+        jTextArea1.setText(jTextArea1.getText().toUpperCase());
+    }//GEN-LAST:event_ButtonMayusculaMouseClicked
+
+    private void ButtonMinusculaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonMinusculaMouseClicked
+        jTextArea1.setText(jTextArea1.getText().toLowerCase());
+    }//GEN-LAST:event_ButtonMinusculaMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -163,6 +216,7 @@ public class MementoInterfaz extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MementoInterfaz().setVisible(true);
+                
             }
         });
     }

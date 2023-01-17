@@ -13,6 +13,10 @@ import java.util.ArrayList;
 public class Historial {
     
     private ArrayList<Memento> estados;
+
+    public Historial() {
+        estados = new ArrayList<Memento>();
+    }
     
     public void guardar(Memento pMemento){
         estados.add(pMemento);
@@ -24,5 +28,9 @@ public class Historial {
             mementoAnterior = estados.remove(estados.size()-1);
         }
         return mementoAnterior;
+    }
+    
+    public boolean vacio(){
+        return estados.size()==0;
     }
 }

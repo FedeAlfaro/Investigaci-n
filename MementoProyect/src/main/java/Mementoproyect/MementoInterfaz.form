@@ -146,21 +146,33 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Guardar"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ButtonGuardarMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="ButtonMayuscula">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Mayuscula"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ButtonMayusculaMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="ButtonMinuscula">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Minuscula"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ButtonMinusculaMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="ButtonRegresar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Regresar"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ButtonRegresarMouseClicked"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtCreador">
               <Properties>
