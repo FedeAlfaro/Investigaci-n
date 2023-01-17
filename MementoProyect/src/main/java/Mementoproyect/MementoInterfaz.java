@@ -21,7 +21,11 @@ public class MementoInterfaz extends javax.swing.JFrame {
     public MementoInterfaz() {
         initComponents();
         historial = new Historial();
+<<<<<<< HEAD
         documento = new Documento("","");
+=======
+        documento = new Documento();
+>>>>>>> da93a2aaa173ae4dacd0a402f36302d39b913344
         ButtonRegresar.setVisible(false);
     }
 
