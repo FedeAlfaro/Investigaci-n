@@ -20,6 +20,7 @@ public class MementoInterfaz extends javax.swing.JFrame {
         initComponents();
         historial = new Historial();
         documento = new Documento();
+        ButtonRegresar.setVisible(false);
     }
 
     /**
