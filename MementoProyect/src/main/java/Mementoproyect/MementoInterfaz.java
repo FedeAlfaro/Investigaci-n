@@ -4,6 +4,8 @@
  */
 package Mementoproyect;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Jeshon04_CRC
@@ -19,7 +21,8 @@ public class MementoInterfaz extends javax.swing.JFrame {
     public MementoInterfaz() {
         initComponents();
         historial = new Historial();
-        documento = new Documento();
+        documento = new Documento("","");
+        ButtonRegresar.setVisible(false);
     }
 
     /**
@@ -58,6 +61,11 @@ public class MementoInterfaz extends javax.swing.JFrame {
                 ButtonGuardarMouseClicked(evt);
             }
         });
+        ButtonGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonGuardarActionPerformed(evt);
+            }
+        });
 
         ButtonMayuscula.setText("Mayuscula");
         ButtonMayuscula.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -79,8 +87,18 @@ public class MementoInterfaz extends javax.swing.JFrame {
                 ButtonRegresarMouseClicked(evt);
             }
         });
+        ButtonRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonRegresarActionPerformed(evt);
+            }
+        });
 
         txtCreador.setBorder(javax.swing.BorderFactory.createTitledBorder("Creador"));
+        txtCreador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCreadorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -109,8 +127,8 @@ public class MementoInterfaz extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addComponent(txtCreador, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addComponent(txtCreador, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -158,12 +176,13 @@ public class MementoInterfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ButtonGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonGuardarMouseClicked
-        if(){ //si los textfield no están vacíos
+        if(!jTextArea1.getText().isBlank() || !txtCreador.getText().isBlank()){ //si los textfield no están vacíos
             documento.setCreador(txtCreador.getText());
             documento.setTexto(jTextArea1.getText());
             historial.guardar(documento.guardarEstado());
+            ButtonRegresar.setVisible(true);
         }else{ //mandar mensaj de rellenar los espacios para guardar
-        
+            JOptionPane.showMessageDialog(this, "Por favor llene todos los campos");
         }
     }//GEN-LAST:event_ButtonGuardarMouseClicked
 
@@ -171,9 +190,13 @@ public class MementoInterfaz extends javax.swing.JFrame {
         if(!historial.vacio()){ //si el historial ya no tiene una copia anterior
             Memento memento = historial.restaurar();
             documento.setTexto(memento.getTexto());
+            jTextArea1.setText(memento.getTexto());
             documento.setCreador(memento.getCreador());
+            txtCreador.setText(memento.getCreador());
         }else{ //mandar mensaje de que ya no hay copias o mejor aún esconder el botón
-            aaaaaa //borrar esta linea, es solo para que vean que hay que cambiarlo
+            //aaaaaa //borrar esta linea, es solo para que vean que hay que cambiarlo
+            ButtonRegresar.setVisible(false);
+            JOptionPane.showMessageDialog(this, "Ya no hay copias para mostrar");
         }
     }//GEN-LAST:event_ButtonRegresarMouseClicked
 
@@ -184,6 +207,18 @@ public class MementoInterfaz extends javax.swing.JFrame {
     private void ButtonMinusculaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ButtonMinusculaMouseClicked
         jTextArea1.setText(jTextArea1.getText().toLowerCase());
     }//GEN-LAST:event_ButtonMinusculaMouseClicked
+
+    private void ButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonGuardarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButtonGuardarActionPerformed
+
+    private void ButtonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonRegresarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ButtonRegresarActionPerformed
+
+    private void txtCreadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCreadorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCreadorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,6 +249,7 @@ public class MementoInterfaz extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new MementoInterfaz().setVisible(true);
                 
